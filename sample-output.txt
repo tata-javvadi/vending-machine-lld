@@ -1,0 +1,15 @@
+Current inventory:
+Aisle 1: hersheys (ID: 1, price: 5.0), stock=3
+Aisle 2: biskfarm (ID: 2, price: 2.0), stock=3
+
+5.00 coin is inserted.
+3.00 coin is inserted.
+Product hersheys (ID 1) is being dispensed. Please collect the change of 3.00!
+5.00 coin is inserted.
+Product hersheys (ID 1) is being dispensed. Please collect the change of 0.00!
+7.00 coin is inserted.
+Product biskfarm (ID 2) is being dispensed. Please collect the change of 5.00!
+
+Current inventory:
+Aisle 1: hersheys (ID: 1, price: 5.0), stock=1
+Aisle 2: biskfarm (ID: 2, price: 2.0), stock=2
