@@ -1,8 +1,5 @@
 import Inventory.Product;
 import vendingmachine.VendingMachine;
-import Payment.CardPayment;
-import Payment.CashPayment;
-import Payment.UpiPayment;
 
 public class Driver {
     public static void main(String[] args) {
@@ -30,15 +27,6 @@ public class Driver {
 
         vendingMachine.insertCoin(7.0);
         vendingMachine.pressButton(2);
-
-        vendingMachine.setPaymentStrategy(new CardPayment("4111111111111234"));
-        vendingMachine.payAndSelect(1);
-
-        vendingMachine.setPaymentStrategy(new UpiPayment("customer@upi"));
-        vendingMachine.payAndSelect(2);
-
-        vendingMachine.setPaymentStrategy(new CashPayment(5.0));
-        vendingMachine.payAndSelect(1);
 
         System.out.println();
         vendingMachine.displayInventory();

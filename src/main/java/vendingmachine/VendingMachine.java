@@ -1,12 +1,10 @@
 package vendingmachine;
 
 import Inventory.Inventory;
-import Inventory.Product;
 import States.CoinInsertedState;
 import States.DispenseState;
 import States.NoCoinInsertedState;
 import States.State;
-import Payment.PaymentStrategy;
 
 public class VendingMachine {
     private final NoCoinInsertedState noCoinInsertedState;
@@ -15,7 +13,6 @@ public class VendingMachine {
     private State currentVendingMachineState;
     private Inventory inventory;
     private double amount;
-    private PaymentStrategy paymentStrategy;
     private static final int AISLE_COUNT = 10;
 
     public VendingMachine() {
@@ -44,33 +41,6 @@ public class VendingMachine {
     public void insertCoin(double amount) {
         currentVendingMachineState.insertCoin(amount);
         System.out.println(String.format("%.2f", amount) + " coin is inserted.");
-    }
-
-    public void setPaymentStrategy(PaymentStrategy paymentStrategy) {
-        if (paymentStrategy == null) {
-            throw new IllegalArgumentException("Payment strategy cannot be null.");
-        }
-        this.paymentStrategy = paymentStrategy;
-    }
-
-    public PaymentStrategy getPaymentStrategy() { return paymentStrategy; }
-
-    /** Charges the selected payment mode for the product in the aisle. */
-    public void payAndSelect(int aisleNumber) {
-        if (paymentStrategy == null) {
-            throw new IllegalStateException("Select a payment mode before checkout.");
-        }
-        if (currentVendingMachineState != noCoinInsertedState) {
-            throw new IllegalStateException("Complete or cancel the current purchase before checkout.");
-        }
-        Product product = inventory.getProductAt(aisleNumber);
-        if (product == null || !inventory.checkIfProductAvailable(product.getId())) {
-            throw new IllegalStateException("No product available in aisle " + aisleNumber + ".");
-        }
-        paymentStrategy.pay(product.getPrice());
-        System.out.println("Payment successful using " + paymentStrategy.getName() + ".");
-        inventory.deductProductCount(aisleNumber);
-        System.out.println("Product " + product.getName() + " (ID " + product.getId() + ") is dispensed.");
     }
 
     public void pressButton(int aisleNumber) {
